@@ -1,0 +1,1433 @@
+
+Housealarm2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000006a8  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  000006a8  0000073c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000010  00800062  00800062  0000073e  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  0000073e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000011c  00000000  00000000  0000075e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000097b  00000000  00000000  0000087a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000289  00000000  00000000  000011f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000701  00000000  00000000  0000147e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000b0  00000000  00000000  00001b80  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000001bb  00000000  00000000  00001c30  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000039c  00000000  00000000  00001deb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000001e0  00000000  00000000  00002187  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 ea       	ldi	r30, 0xA8	; 168
+  68:	f6 e0       	ldi	r31, 0x06	; 6
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a2 e6       	ldi	r26, 0x62	; 98
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a2 37       	cpi	r26, 0x72	; 114
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 69 02 	call	0x4d2	; 0x4d2 <main>
+  8a:	0c 94 52 03 	jmp	0x6a4	; 0x6a4 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <set_password>:
+
+
+//*******************************************************
+//Password functions
+void set_password(unsigned long int code)
+{
+  92:	ef 92       	push	r14
+  94:	ff 92       	push	r15
+  96:	0f 93       	push	r16
+  98:	1f 93       	push	r17
+  9a:	7b 01       	movw	r14, r22
+  9c:	8c 01       	movw	r16, r24
+	int i;
+	for(i = 0;i<Pass_length; i++)
+	{
+		password[i] = code % 10 ; 
+  9e:	2a e0       	ldi	r18, 0x0A	; 10
+  a0:	30 e0       	ldi	r19, 0x00	; 0
+  a2:	40 e0       	ldi	r20, 0x00	; 0
+  a4:	50 e0       	ldi	r21, 0x00	; 0
+  a6:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+  aa:	70 93 6b 00 	sts	0x006B, r23
+  ae:	60 93 6a 00 	sts	0x006A, r22
+		code = code/10;
+  b2:	c8 01       	movw	r24, r16
+  b4:	b7 01       	movw	r22, r14
+  b6:	2a e0       	ldi	r18, 0x0A	; 10
+  b8:	30 e0       	ldi	r19, 0x00	; 0
+  ba:	40 e0       	ldi	r20, 0x00	; 0
+  bc:	50 e0       	ldi	r21, 0x00	; 0
+  be:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+  c2:	12 2f       	mov	r17, r18
+  c4:	03 2f       	mov	r16, r19
+  c6:	f4 2e       	mov	r15, r20
+  c8:	e5 2e       	mov	r14, r21
+void set_password(unsigned long int code)
+{
+	int i;
+	for(i = 0;i<Pass_length; i++)
+	{
+		password[i] = code % 10 ; 
+  ca:	62 2f       	mov	r22, r18
+  cc:	73 2f       	mov	r23, r19
+  ce:	84 2f       	mov	r24, r20
+  d0:	95 2f       	mov	r25, r21
+  d2:	2a e0       	ldi	r18, 0x0A	; 10
+  d4:	30 e0       	ldi	r19, 0x00	; 0
+  d6:	40 e0       	ldi	r20, 0x00	; 0
+  d8:	50 e0       	ldi	r21, 0x00	; 0
+  da:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+  de:	70 93 6d 00 	sts	0x006D, r23
+  e2:	60 93 6c 00 	sts	0x006C, r22
+		code = code/10;
+  e6:	61 2f       	mov	r22, r17
+  e8:	70 2f       	mov	r23, r16
+  ea:	8f 2d       	mov	r24, r15
+  ec:	9e 2d       	mov	r25, r14
+  ee:	2a e0       	ldi	r18, 0x0A	; 10
+  f0:	30 e0       	ldi	r19, 0x00	; 0
+  f2:	40 e0       	ldi	r20, 0x00	; 0
+  f4:	50 e0       	ldi	r21, 0x00	; 0
+  f6:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+  fa:	12 2f       	mov	r17, r18
+  fc:	03 2f       	mov	r16, r19
+  fe:	f4 2e       	mov	r15, r20
+ 100:	e5 2e       	mov	r14, r21
+void set_password(unsigned long int code)
+{
+	int i;
+	for(i = 0;i<Pass_length; i++)
+	{
+		password[i] = code % 10 ; 
+ 102:	62 2f       	mov	r22, r18
+ 104:	73 2f       	mov	r23, r19
+ 106:	84 2f       	mov	r24, r20
+ 108:	95 2f       	mov	r25, r21
+ 10a:	2a e0       	ldi	r18, 0x0A	; 10
+ 10c:	30 e0       	ldi	r19, 0x00	; 0
+ 10e:	40 e0       	ldi	r20, 0x00	; 0
+ 110:	50 e0       	ldi	r21, 0x00	; 0
+ 112:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+ 116:	70 93 6f 00 	sts	0x006F, r23
+ 11a:	60 93 6e 00 	sts	0x006E, r22
+ 11e:	61 2f       	mov	r22, r17
+ 120:	70 2f       	mov	r23, r16
+ 122:	8f 2d       	mov	r24, r15
+ 124:	9e 2d       	mov	r25, r14
+ 126:	2a e0       	ldi	r18, 0x0A	; 10
+ 128:	30 e0       	ldi	r19, 0x00	; 0
+ 12a:	40 e0       	ldi	r20, 0x00	; 0
+ 12c:	50 e0       	ldi	r21, 0x00	; 0
+ 12e:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+ 132:	ca 01       	movw	r24, r20
+ 134:	b9 01       	movw	r22, r18
+ 136:	2a e0       	ldi	r18, 0x0A	; 10
+ 138:	30 e0       	ldi	r19, 0x00	; 0
+ 13a:	40 e0       	ldi	r20, 0x00	; 0
+ 13c:	50 e0       	ldi	r21, 0x00	; 0
+ 13e:	0e 94 30 03 	call	0x660	; 0x660 <__udivmodsi4>
+ 142:	70 93 71 00 	sts	0x0071, r23
+ 146:	60 93 70 00 	sts	0x0070, r22
+		code = code/10;
+	}
+	return;	
+}
+ 14a:	1f 91       	pop	r17
+ 14c:	0f 91       	pop	r16
+ 14e:	ff 90       	pop	r15
+ 150:	ef 90       	pop	r14
+ 152:	08 95       	ret
+
+00000154 <Check_password>:
+
+bool Check_password(int* codeAddr)
+{
+ 154:	dc 01       	movw	r26, r24
+ 156:	e0 e7       	ldi	r30, 0x70	; 112
+ 158:	f0 e0       	ldi	r31, 0x00	; 0
+ 15a:	40 e0       	ldi	r20, 0x00	; 0
+ 15c:	50 e0       	ldi	r21, 0x00	; 0
+ 15e:	09 c0       	rjmp	.+18     	; 0x172 <Check_password+0x1e>
+	int i=0;
+	for(i = 0; (i<Pass_length) && (*(codeAddr + i) == password[Pass_length-i-1]); i++)
+ 160:	4f 5f       	subi	r20, 0xFF	; 255
+ 162:	5f 4f       	sbci	r21, 0xFF	; 255
+ 164:	12 96       	adiw	r26, 0x02	; 2
+ 166:	32 97       	sbiw	r30, 0x02	; 2
+ 168:	44 30       	cpi	r20, 0x04	; 4
+ 16a:	51 05       	cpc	r21, r1
+ 16c:	11 f4       	brne	.+4      	; 0x172 <Check_password+0x1e>
+ 16e:	81 e0       	ldi	r24, 0x01	; 1
+ 170:	08 95       	ret
+ 172:	2d 91       	ld	r18, X+
+ 174:	3c 91       	ld	r19, X
+ 176:	11 97       	sbiw	r26, 0x01	; 1
+ 178:	80 81       	ld	r24, Z
+ 17a:	91 81       	ldd	r25, Z+1	; 0x01
+ 17c:	28 17       	cp	r18, r24
+ 17e:	39 07       	cpc	r19, r25
+ 180:	79 f3       	breq	.-34     	; 0x160 <Check_password+0xc>
+ 182:	80 e0       	ldi	r24, 0x00	; 0
+	{
+		;
+	}
+	if (i == Pass_length) return true;
+	else return false;
+}
+ 184:	08 95       	ret
+
+00000186 <init_homeSecurity>:
+
+// Home Security Initialization function
+// Sets PORT i/o directions and switch OFF Siren and Motor(In free motion)
+void init_homeSecurity(void)
+{
+	Seg7_DDR = 0xFF;		// PORT C connected to 7 Segment display as OUTPUT
+ 186:	8f ef       	ldi	r24, 0xFF	; 255
+ 188:	84 bb       	out	0x14, r24	; 20
+	Seg7_PORT = codeH;		// Initially Display H on 7 seg. display
+ 18a:	89 e8       	ldi	r24, 0x89	; 137
+ 18c:	85 bb       	out	0x15, r24	; 21
+	
+	//PA0 (INPUT) from PLL sensor....
+	//PA1&PA2 (OUTPUT) to MOTOR to OPEN DOOR
+	//PA3 (OUTPUT) to Siren	
+	DDRA = 0b00001110;
+ 18e:	8e e0       	ldi	r24, 0x0E	; 14
+ 190:	8a bb       	out	0x1a, r24	; 26
+	Motor_free;
+ 192:	d9 98       	cbi	0x1b, 1	; 27
+ 194:	da 98       	cbi	0x1b, 2	; 27
+	Siren_off;
+ 196:	db 98       	cbi	0x1b, 3	; 27
+	
+	key_flag = false;
+ 198:	10 92 66 00 	sts	0x0066, r1
+	return;	
+}
+ 19c:	08 95       	ret
+
+0000019e <Seg_display>:
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 19e:	85 bb       	out	0x15, r24	; 21
+	return;
+}
+ 1a0:	08 95       	ret
+
+000001a2 <Seg_blink>:
+
+void Seg_blink(uint8_t data, int time)
+{
+ 1a2:	40 e0       	ldi	r20, 0x00	; 0
+ 1a4:	50 e0       	ldi	r21, 0x00	; 0
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 1a6:	a0 e9       	ldi	r26, 0x90	; 144
+ 1a8:	b1 e0       	ldi	r27, 0x01	; 1
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 1aa:	9f ef       	ldi	r25, 0xFF	; 255
+ 1ac:	14 c0       	rjmp	.+40     	; 0x1d6 <Seg_blink+0x34>
+ 1ae:	85 bb       	out	0x15, r24	; 21
+ 1b0:	20 e1       	ldi	r18, 0x10	; 16
+ 1b2:	37 e2       	ldi	r19, 0x27	; 39
+ 1b4:	fd 01       	movw	r30, r26
+ 1b6:	31 97       	sbiw	r30, 0x01	; 1
+ 1b8:	f1 f7       	brne	.-4      	; 0x1b6 <Seg_blink+0x14>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1ba:	21 50       	subi	r18, 0x01	; 1
+ 1bc:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1be:	d1 f7       	brne	.-12     	; 0x1b4 <Seg_blink+0x12>
+ 1c0:	95 bb       	out	0x15, r25	; 21
+ 1c2:	20 e1       	ldi	r18, 0x10	; 16
+ 1c4:	37 e2       	ldi	r19, 0x27	; 39
+ 1c6:	fd 01       	movw	r30, r26
+ 1c8:	31 97       	sbiw	r30, 0x01	; 1
+ 1ca:	f1 f7       	brne	.-4      	; 0x1c8 <Seg_blink+0x26>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1cc:	21 50       	subi	r18, 0x01	; 1
+ 1ce:	30 40       	sbci	r19, 0x00	; 0
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1d0:	d1 f7       	brne	.-12     	; 0x1c6 <Seg_blink+0x24>
+}
+
+void Seg_blink(uint8_t data, int time)
+{
+	int temp;
+	for(temp = 0;temp < time; temp ++)
+ 1d2:	4f 5f       	subi	r20, 0xFF	; 255
+ 1d4:	5f 4f       	sbci	r21, 0xFF	; 255
+ 1d6:	46 17       	cp	r20, r22
+ 1d8:	57 07       	cpc	r21, r23
+ 1da:	4c f3       	brlt	.-46     	; 0x1ae <Seg_blink+0xc>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 1dc:	85 bb       	out	0x15, r24	; 21
+		Seg_display(Clear);
+		_delay_ms(1000);
+	}
+	Seg_display(data);
+	return;
+}
+ 1de:	08 95       	ret
+
+000001e0 <door_unlock>:
+
+
+//door LOCK and UNLOCK functions
+void door_unlock(void)
+{
+	Siren_off;
+ 1e0:	db 98       	cbi	0x1b, 3	; 27
+	Motor_open;
+ 1e2:	d9 9a       	sbi	0x1b, 1	; 27
+ 1e4:	da 98       	cbi	0x1b, 2	; 27
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 1e6:	81 ec       	ldi	r24, 0xC1	; 193
+ 1e8:	85 bb       	out	0x15, r24	; 21
+ 1ea:	80 e1       	ldi	r24, 0x10	; 16
+ 1ec:	97 e2       	ldi	r25, 0x27	; 39
+ 1ee:	20 e9       	ldi	r18, 0x90	; 144
+ 1f0:	31 e0       	ldi	r19, 0x01	; 1
+ 1f2:	f9 01       	movw	r30, r18
+ 1f4:	31 97       	sbiw	r30, 0x01	; 1
+ 1f6:	f1 f7       	brne	.-4      	; 0x1f4 <door_unlock+0x14>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1f8:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1fa:	d9 f7       	brne	.-10     	; 0x1f2 <door_unlock+0x12>
+{
+	Siren_off;
+	Motor_open;
+	Seg_display(codeU);
+	_delay_ms(1000);
+	Motor_free;
+ 1fc:	d9 98       	cbi	0x1b, 1	; 27
+ 1fe:	da 98       	cbi	0x1b, 2	; 27
+	pass_status = false;
+ 200:	10 92 65 00 	sts	0x0065, r1
+}
+ 204:	08 95       	ret
+
+00000206 <door_lock>:
+
+void door_lock(void)
+{
+	Motor_lock;
+ 206:	d9 9a       	sbi	0x1b, 1	; 27
+ 208:	da 9a       	sbi	0x1b, 2	; 27
+	Siren_off;
+ 20a:	db 98       	cbi	0x1b, 3	; 27
+ 20c:	20 e0       	ldi	r18, 0x00	; 0
+ 20e:	30 e0       	ldi	r19, 0x00	; 0
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 210:	77 ec       	ldi	r23, 0xC7	; 199
+ 212:	40 e9       	ldi	r20, 0x90	; 144
+ 214:	51 e0       	ldi	r21, 0x01	; 1
+ 216:	6f ef       	ldi	r22, 0xFF	; 255
+ 218:	75 bb       	out	0x15, r23	; 21
+ 21a:	80 e1       	ldi	r24, 0x10	; 16
+ 21c:	97 e2       	ldi	r25, 0x27	; 39
+ 21e:	fa 01       	movw	r30, r20
+ 220:	31 97       	sbiw	r30, 0x01	; 1
+ 222:	f1 f7       	brne	.-4      	; 0x220 <door_lock+0x1a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 224:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 226:	d9 f7       	brne	.-10     	; 0x21e <door_lock+0x18>
+ 228:	65 bb       	out	0x15, r22	; 21
+ 22a:	80 e1       	ldi	r24, 0x10	; 16
+ 22c:	97 e2       	ldi	r25, 0x27	; 39
+ 22e:	fa 01       	movw	r30, r20
+ 230:	31 97       	sbiw	r30, 0x01	; 1
+ 232:	f1 f7       	brne	.-4      	; 0x230 <door_lock+0x2a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 234:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 236:	d9 f7       	brne	.-10     	; 0x22e <door_lock+0x28>
+}
+
+void Seg_blink(uint8_t data, int time)
+{
+	int temp;
+	for(temp = 0;temp < time; temp ++)
+ 238:	2f 5f       	subi	r18, 0xFF	; 255
+ 23a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 23c:	23 30       	cpi	r18, 0x03	; 3
+ 23e:	31 05       	cpc	r19, r1
+ 240:	59 f7       	brne	.-42     	; 0x218 <door_lock+0x12>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 242:	87 ec       	ldi	r24, 0xC7	; 199
+ 244:	85 bb       	out	0x15, r24	; 21
+void door_lock(void)
+{
+	Motor_lock;
+	Siren_off;
+	Seg_blink(codeL,3);				// Display L in 7 Seg display (Lock Mode display)
+	lock_state = true;
+ 246:	81 e0       	ldi	r24, 0x01	; 1
+ 248:	80 93 64 00 	sts	0x0064, r24
+	pass_status = false;
+ 24c:	10 92 65 00 	sts	0x0065, r1
+}
+ 250:	08 95       	ret
+
+00000252 <GetKeyPressed>:
+[03] [04] [05]
+[06] [07] [08]
+[09] [10] [11]
+*/
+uint8_t GetKeyPressed(void)
+{
+ 252:	cf 93       	push	r28
+ 254:	df 93       	push	r29
+	uint8_t r,c;
+	if(key_flag == false){
+ 256:	80 91 66 00 	lds	r24, 0x0066
+ 25a:	88 23       	and	r24, r24
+ 25c:	b9 f5       	brne	.+110    	; 0x2cc <GetKeyPressed+0x7a>
+	KEYPAD_PORT|= 0X0F;
+ 25e:	88 b3       	in	r24, 0x18	; 24
+ 260:	8f 60       	ori	r24, 0x0F	; 15
+ 262:	88 bb       	out	0x18, r24	; 24
+ 264:	60 e0       	ldi	r22, 0x00	; 0
+ 266:	70 e0       	ldi	r23, 0x00	; 0
+	for(c=0;c<3;c++)
+	{		
+		KEYPAD_DDR&=~(0X7F);
+		KEYPAD_DDR|=(0X40>>c);
+ 268:	c0 e4       	ldi	r28, 0x40	; 64
+ 26a:	d0 e0       	ldi	r29, 0x00	; 0
+		for(r=0;r<4;r++)
+		{
+			if(!(KEYPAD_PIN & (0X08>>r)))
+ 26c:	a8 e0       	ldi	r26, 0x08	; 8
+ 26e:	b0 e0       	ldi	r27, 0x00	; 0
+*/
+uint8_t GetKeyPressed(void)
+{
+	uint8_t r,c;
+	if(key_flag == false){
+	KEYPAD_PORT|= 0X0F;
+ 270:	e6 2f       	mov	r30, r22
+	for(c=0;c<3;c++)
+	{		
+		KEYPAD_DDR&=~(0X7F);
+ 272:	87 b3       	in	r24, 0x17	; 23
+ 274:	80 78       	andi	r24, 0x80	; 128
+ 276:	87 bb       	out	0x17, r24	; 23
+		KEYPAD_DDR|=(0X40>>c);
+ 278:	27 b3       	in	r18, 0x17	; 23
+ 27a:	ce 01       	movw	r24, r28
+ 27c:	06 2e       	mov	r0, r22
+ 27e:	02 c0       	rjmp	.+4      	; 0x284 <GetKeyPressed+0x32>
+ 280:	95 95       	asr	r25
+ 282:	87 95       	ror	r24
+ 284:	0a 94       	dec	r0
+ 286:	e2 f7       	brpl	.-8      	; 0x280 <GetKeyPressed+0x2e>
+ 288:	28 2b       	or	r18, r24
+ 28a:	27 bb       	out	0x17, r18	; 23
+ 28c:	40 e0       	ldi	r20, 0x00	; 0
+ 28e:	50 e0       	ldi	r21, 0x00	; 0
+		for(r=0;r<4;r++)
+		{
+			if(!(KEYPAD_PIN & (0X08>>r)))
+ 290:	86 b3       	in	r24, 0x16	; 22
+ 292:	9d 01       	movw	r18, r26
+ 294:	04 2e       	mov	r0, r20
+ 296:	02 c0       	rjmp	.+4      	; 0x29c <GetKeyPressed+0x4a>
+ 298:	35 95       	asr	r19
+ 29a:	27 95       	ror	r18
+ 29c:	0a 94       	dec	r0
+ 29e:	e2 f7       	brpl	.-8      	; 0x298 <GetKeyPressed+0x46>
+ 2a0:	90 e0       	ldi	r25, 0x00	; 0
+ 2a2:	28 23       	and	r18, r24
+ 2a4:	39 23       	and	r19, r25
+ 2a6:	23 2b       	or	r18, r19
+ 2a8:	39 f4       	brne	.+14     	; 0x2b8 <GetKeyPressed+0x66>
+			{
+			return (r*3+c);
+ 2aa:	ca 01       	movw	r24, r20
+ 2ac:	88 0f       	add	r24, r24
+ 2ae:	99 1f       	adc	r25, r25
+ 2b0:	84 0f       	add	r24, r20
+ 2b2:	95 1f       	adc	r25, r21
+ 2b4:	8e 0f       	add	r24, r30
+ 2b6:	0b c0       	rjmp	.+22     	; 0x2ce <GetKeyPressed+0x7c>
+ 2b8:	4f 5f       	subi	r20, 0xFF	; 255
+ 2ba:	5f 4f       	sbci	r21, 0xFF	; 255
+	KEYPAD_PORT|= 0X0F;
+	for(c=0;c<3;c++)
+	{		
+		KEYPAD_DDR&=~(0X7F);
+		KEYPAD_DDR|=(0X40>>c);
+		for(r=0;r<4;r++)
+ 2bc:	44 30       	cpi	r20, 0x04	; 4
+ 2be:	51 05       	cpc	r21, r1
+ 2c0:	39 f7       	brne	.-50     	; 0x290 <GetKeyPressed+0x3e>
+ 2c2:	6f 5f       	subi	r22, 0xFF	; 255
+ 2c4:	7f 4f       	sbci	r23, 0xFF	; 255
+uint8_t GetKeyPressed(void)
+{
+	uint8_t r,c;
+	if(key_flag == false){
+	KEYPAD_PORT|= 0X0F;
+	for(c=0;c<3;c++)
+ 2c6:	63 30       	cpi	r22, 0x03	; 3
+ 2c8:	71 05       	cpc	r23, r1
+ 2ca:	91 f6       	brne	.-92     	; 0x270 <GetKeyPressed+0x1e>
+ 2cc:	8f ef       	ldi	r24, 0xFF	; 255
+		}
+	}
+	}	
+	
+	return 0XFF;//Indicate No key pressed
+}
+ 2ce:	df 91       	pop	r29
+ 2d0:	cf 91       	pop	r28
+ 2d2:	08 95       	ret
+
+000002d4 <GC_Code>:
+
+
+// Function for getting the code from the key pad...
+void GC_Code (void)
+{
+ 2d4:	af 92       	push	r10
+ 2d6:	bf 92       	push	r11
+ 2d8:	cf 92       	push	r12
+ 2da:	df 92       	push	r13
+ 2dc:	ef 92       	push	r14
+ 2de:	ff 92       	push	r15
+ 2e0:	0f 93       	push	r16
+ 2e2:	1f 93       	push	r17
+ 2e4:	df 93       	push	r29
+ 2e6:	cf 93       	push	r28
+ 2e8:	cd b7       	in	r28, 0x3d	; 61
+ 2ea:	de b7       	in	r29, 0x3e	; 62
+ 2ec:	28 97       	sbiw	r28, 0x08	; 8
+ 2ee:	0f b6       	in	r0, 0x3f	; 63
+ 2f0:	f8 94       	cli
+ 2f2:	de bf       	out	0x3e, r29	; 62
+ 2f4:	0f be       	out	0x3f, r0	; 63
+ 2f6:	cd bf       	out	0x3d, r28	; 61
+	int code[Pass_length];
+	int prev_key = key;
+ 2f8:	e0 90 60 00 	lds	r14, 0x0060
+ 2fc:	f0 90 61 00 	lds	r15, 0x0061
+ 300:	6e 01       	movw	r12, r28
+ 302:	08 94       	sec
+ 304:	c1 1c       	adc	r12, r1
+ 306:	d1 1c       	adc	r13, r1
+				prev_key = key;
+			}
+			prev_key = key;
+			if (key == 9)				// Clear Password
+			{
+				code_temp = (-1);
+ 308:	aa 24       	eor	r10, r10
+ 30a:	aa 94       	dec	r10
+ 30c:	ba 2c       	mov	r11, r10
+	int temp;
+	int retry_temp = 0;
+	do 
+	{
+	
+	if(retry_no < Retry_length)
+ 30e:	80 91 62 00 	lds	r24, 0x0062
+ 312:	90 91 63 00 	lds	r25, 0x0063
+ 316:	03 97       	sbiw	r24, 0x03	; 3
+ 318:	0c f0       	brlt	.+2      	; 0x31c <GC_Code+0x48>
+ 31a:	b7 c0       	rjmp	.+366    	; 0x48a <__stack+0x2b>
+	{
+	
+	if (key == 9)
+ 31c:	80 91 60 00 	lds	r24, 0x0060
+ 320:	90 91 61 00 	lds	r25, 0x0061
+ 324:	09 97       	sbiw	r24, 0x09	; 9
+ 326:	f1 f1       	breq	.+124    	; 0x3a4 <GC_Code+0xd0>
+		return;		// Exit password entry mode
+	}
+	
+	else
+	{
+		for(code_temp = 0; code_temp < Pass_length; code_temp++)
+ 328:	10 92 68 00 	sts	0x0068, r1
+ 32c:	10 92 67 00 	sts	0x0067, r1
+ 330:	88 c0       	rjmp	.+272    	; 0x442 <GC_Code+0x16e>
+		{
+			if(code_temp < Pass_length)
+			{
+			if(key == 9) {;}
+ 332:	80 91 60 00 	lds	r24, 0x0060
+ 336:	90 91 61 00 	lds	r25, 0x0061
+ 33a:	89 30       	cpi	r24, 0x09	; 9
+ 33c:	91 05       	cpc	r25, r1
+ 33e:	81 f0       	breq	.+32     	; 0x360 <GC_Code+0x8c>
+ 340:	f9 01       	movw	r30, r18
+ 342:	ee 0f       	add	r30, r30
+ 344:	ff 1f       	adc	r31, r31
+			else if(key == 10) {code[code_temp] = 0;}
+ 346:	8a 30       	cpi	r24, 0x0A	; 10
+ 348:	91 05       	cpc	r25, r1
+ 34a:	29 f4       	brne	.+10     	; 0x356 <GC_Code+0x82>
+ 34c:	ec 0d       	add	r30, r12
+ 34e:	fd 1d       	adc	r31, r13
+ 350:	11 82       	std	Z+1, r1	; 0x01
+ 352:	10 82       	st	Z, r1
+ 354:	05 c0       	rjmp	.+10     	; 0x360 <GC_Code+0x8c>
+			else {code[code_temp] = (key+1);}
+ 356:	ec 0d       	add	r30, r12
+ 358:	fd 1d       	adc	r31, r13
+ 35a:	01 96       	adiw	r24, 0x01	; 1
+ 35c:	91 83       	std	Z+1, r25	; 0x01
+ 35e:	80 83       	st	Z, r24
+			key = GetKeyPressed();
+			while(prev_key == key)
+			{
+				key = GetKeyPressed();
+ 360:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 364:	80 93 60 00 	sts	0x0060, r24
+ 368:	10 92 61 00 	sts	0x0061, r1
+			{
+			if(key == 9) {;}
+			else if(key == 10) {code[code_temp] = 0;}
+			else {code[code_temp] = (key+1);}
+			key = GetKeyPressed();
+			while(prev_key == key)
+ 36c:	80 91 60 00 	lds	r24, 0x0060
+ 370:	90 91 61 00 	lds	r25, 0x0061
+ 374:	e8 16       	cp	r14, r24
+ 376:	f9 06       	cpc	r15, r25
+ 378:	99 f3       	breq	.-26     	; 0x360 <GC_Code+0x8c>
+ 37a:	06 c0       	rjmp	.+12     	; 0x388 <GC_Code+0xb4>
+				key = GetKeyPressed();
+				temp = key;
+			}
+			while(key == 0xFF)
+			{
+				key = GetKeyPressed();
+ 37c:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 380:	80 93 60 00 	sts	0x0060, r24
+ 384:	10 92 61 00 	sts	0x0061, r1
+			while(prev_key == key)
+			{
+				key = GetKeyPressed();
+				temp = key;
+			}
+			while(key == 0xFF)
+ 388:	00 91 60 00 	lds	r16, 0x0060
+ 38c:	10 91 61 00 	lds	r17, 0x0061
+ 390:	0f 3f       	cpi	r16, 0xFF	; 255
+ 392:	11 05       	cpc	r17, r1
+ 394:	99 f3       	breq	.-26     	; 0x37c <GC_Code+0xa8>
+			{
+				key = GetKeyPressed();
+			}
+			if(prev_key == 9 && key == 9) 
+ 396:	89 e0       	ldi	r24, 0x09	; 9
+ 398:	e8 16       	cp	r14, r24
+ 39a:	f1 04       	cpc	r15, r1
+ 39c:	e9 f5       	brne	.+122    	; 0x418 <GC_Code+0x144>
+ 39e:	09 30       	cpi	r16, 0x09	; 9
+ 3a0:	11 05       	cpc	r17, r1
+ 3a2:	31 f4       	brne	.+12     	; 0x3b0 <GC_Code+0xdc>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 3a4:	87 ec       	ldi	r24, 0xC7	; 199
+ 3a6:	85 bb       	out	0x15, r24	; 21
+				key = GetKeyPressed();
+			}
+			if(prev_key == 9 && key == 9) 
+			{
+				Seg_display(codeL);
+				cancel_state = true;
+ 3a8:	81 e0       	ldi	r24, 0x01	; 1
+ 3aa:	80 93 69 00 	sts	0x0069, r24
+ 3ae:	80 c0       	rjmp	.+256    	; 0x4b0 <__stack+0x51>
+ 3b0:	e0 91 67 00 	lds	r30, 0x0067
+ 3b4:	f0 91 68 00 	lds	r31, 0x0068
+				return;		// Exit password entry mode
+			}
+			else if (prev_key == 9)
+			{
+				if(key == 10) {code[code_temp] = 0;}
+ 3b8:	0a 30       	cpi	r16, 0x0A	; 10
+ 3ba:	11 05       	cpc	r17, r1
+ 3bc:	39 f4       	brne	.+14     	; 0x3cc <GC_Code+0xf8>
+ 3be:	ee 0f       	add	r30, r30
+ 3c0:	ff 1f       	adc	r31, r31
+ 3c2:	ec 0d       	add	r30, r12
+ 3c4:	fd 1d       	adc	r31, r13
+ 3c6:	11 82       	std	Z+1, r1	; 0x01
+ 3c8:	10 82       	st	Z, r1
+ 3ca:	11 c0       	rjmp	.+34     	; 0x3ee <GC_Code+0x11a>
+				else {code[code_temp] = (key+1);}
+ 3cc:	ee 0f       	add	r30, r30
+ 3ce:	ff 1f       	adc	r31, r31
+ 3d0:	ec 0d       	add	r30, r12
+ 3d2:	fd 1d       	adc	r31, r13
+ 3d4:	0f 5f       	subi	r16, 0xFF	; 255
+ 3d6:	1f 4f       	sbci	r17, 0xFF	; 255
+ 3d8:	11 83       	std	Z+1, r17	; 0x01
+ 3da:	00 83       	st	Z, r16
+ 3dc:	01 50       	subi	r16, 0x01	; 1
+ 3de:	10 40       	sbci	r17, 0x00	; 0
+ 3e0:	06 c0       	rjmp	.+12     	; 0x3ee <GC_Code+0x11a>
+				prev_key = key;
+				while(prev_key == key)
+				{
+					key = GetKeyPressed();
+ 3e2:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 3e6:	80 93 60 00 	sts	0x0060, r24
+ 3ea:	10 92 61 00 	sts	0x0061, r1
+			else if (prev_key == 9)
+			{
+				if(key == 10) {code[code_temp] = 0;}
+				else {code[code_temp] = (key+1);}
+				prev_key = key;
+				while(prev_key == key)
+ 3ee:	80 91 60 00 	lds	r24, 0x0060
+ 3f2:	90 91 61 00 	lds	r25, 0x0061
+ 3f6:	08 17       	cp	r16, r24
+ 3f8:	19 07       	cpc	r17, r25
+ 3fa:	99 f3       	breq	.-26     	; 0x3e2 <GC_Code+0x10e>
+ 3fc:	06 c0       	rjmp	.+12     	; 0x40a <GC_Code+0x136>
+				{
+					key = GetKeyPressed();
+				}
+				while(key == 0xFF)
+				{
+					key = GetKeyPressed();
+ 3fe:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 402:	80 93 60 00 	sts	0x0060, r24
+ 406:	10 92 61 00 	sts	0x0061, r1
+				prev_key = key;
+				while(prev_key == key)
+				{
+					key = GetKeyPressed();
+				}
+				while(key == 0xFF)
+ 40a:	80 91 60 00 	lds	r24, 0x0060
+ 40e:	90 91 61 00 	lds	r25, 0x0061
+ 412:	8f 3f       	cpi	r24, 0xFF	; 255
+ 414:	91 05       	cpc	r25, r1
+ 416:	99 f3       	breq	.-26     	; 0x3fe <GC_Code+0x12a>
+				{
+					key = GetKeyPressed();
+				}
+				prev_key = key;
+			}
+			prev_key = key;
+ 418:	e0 90 60 00 	lds	r14, 0x0060
+ 41c:	f0 90 61 00 	lds	r15, 0x0061
+			if (key == 9)				// Clear Password
+ 420:	89 e0       	ldi	r24, 0x09	; 9
+ 422:	e8 16       	cp	r14, r24
+ 424:	f1 04       	cpc	r15, r1
+ 426:	21 f4       	brne	.+8      	; 0x430 <GC_Code+0x15c>
+			{
+				code_temp = (-1);
+ 428:	b0 92 68 00 	sts	0x0068, r11
+ 42c:	a0 92 67 00 	sts	0x0067, r10
+		return;		// Exit password entry mode
+	}
+	
+	else
+	{
+		for(code_temp = 0; code_temp < Pass_length; code_temp++)
+ 430:	80 91 67 00 	lds	r24, 0x0067
+ 434:	90 91 68 00 	lds	r25, 0x0068
+ 438:	01 96       	adiw	r24, 0x01	; 1
+ 43a:	90 93 68 00 	sts	0x0068, r25
+ 43e:	80 93 67 00 	sts	0x0067, r24
+ 442:	20 91 67 00 	lds	r18, 0x0067
+ 446:	30 91 68 00 	lds	r19, 0x0068
+ 44a:	24 30       	cpi	r18, 0x04	; 4
+ 44c:	31 05       	cpc	r19, r1
+ 44e:	0c f4       	brge	.+2      	; 0x452 <GC_Code+0x17e>
+ 450:	70 cf       	rjmp	.-288    	; 0x332 <GC_Code+0x5e>
+ 452:	d6 01       	movw	r26, r12
+ 454:	e0 e7       	ldi	r30, 0x70	; 112
+ 456:	f0 e0       	ldi	r31, 0x00	; 0
+ 458:	40 e0       	ldi	r20, 0x00	; 0
+ 45a:	50 e0       	ldi	r21, 0x00	; 0
+ 45c:	07 c0       	rjmp	.+14     	; 0x46c <__stack+0xd>
+}
+
+bool Check_password(int* codeAddr)
+{
+	int i=0;
+	for(i = 0; (i<Pass_length) && (*(codeAddr + i) == password[Pass_length-i-1]); i++)
+ 45e:	4f 5f       	subi	r20, 0xFF	; 255
+ 460:	5f 4f       	sbci	r21, 0xFF	; 255
+ 462:	12 96       	adiw	r26, 0x02	; 2
+ 464:	32 97       	sbiw	r30, 0x02	; 2
+ 466:	44 30       	cpi	r20, 0x04	; 4
+ 468:	51 05       	cpc	r21, r1
+ 46a:	49 f0       	breq	.+18     	; 0x47e <__stack+0x1f>
+ 46c:	2d 91       	ld	r18, X+
+ 46e:	3c 91       	ld	r19, X
+ 470:	11 97       	sbiw	r26, 0x01	; 1
+ 472:	80 81       	ld	r24, Z
+ 474:	91 81       	ldd	r25, Z+1	; 0x01
+ 476:	28 17       	cp	r18, r24
+ 478:	39 07       	cpc	r19, r25
+ 47a:	89 f3       	breq	.-30     	; 0x45e <GC_Code+0x18a>
+ 47c:	0b c0       	rjmp	.+22     	; 0x494 <__stack+0x35>
+		
+				
+		if (Check_password(code) == true)
+		{
+			//door_unlock();
+			cancel_state = false;
+ 47e:	10 92 69 00 	sts	0x0069, r1
+			pass_status = true;
+ 482:	81 e0       	ldi	r24, 0x01	; 1
+ 484:	80 93 65 00 	sts	0x0065, r24
+ 488:	13 c0       	rjmp	.+38     	; 0x4b0 <__stack+0x51>
+		}
+	}
+	
+	else 
+	{
+		cancel_state = false;
+ 48a:	10 92 69 00 	sts	0x0069, r1
+		pass_status = false;
+ 48e:	10 92 65 00 	sts	0x0065, r1
+ 492:	0e c0       	rjmp	.+28     	; 0x4b0 <__stack+0x51>
+			pass_status = true;
+			retry_temp = 0;
+		}
+		else
+		{
+			cancel_state = false;
+ 494:	10 92 69 00 	sts	0x0069, r1
+			pass_status = false;
+ 498:	10 92 65 00 	sts	0x0065, r1
+			retry_no ++;
+ 49c:	80 91 62 00 	lds	r24, 0x0062
+ 4a0:	90 91 63 00 	lds	r25, 0x0063
+ 4a4:	01 96       	adiw	r24, 0x01	; 1
+ 4a6:	90 93 63 00 	sts	0x0063, r25
+ 4aa:	80 93 62 00 	sts	0x0062, r24
+ 4ae:	2f cf       	rjmp	.-418    	; 0x30e <GC_Code+0x3a>
+		retry_temp = 0;	
+	}
+	
+	}while(retry_temp)	;
+	return;
+}
+ 4b0:	28 96       	adiw	r28, 0x08	; 8
+ 4b2:	0f b6       	in	r0, 0x3f	; 63
+ 4b4:	f8 94       	cli
+ 4b6:	de bf       	out	0x3e, r29	; 62
+ 4b8:	0f be       	out	0x3f, r0	; 63
+ 4ba:	cd bf       	out	0x3d, r28	; 61
+ 4bc:	cf 91       	pop	r28
+ 4be:	df 91       	pop	r29
+ 4c0:	1f 91       	pop	r17
+ 4c2:	0f 91       	pop	r16
+ 4c4:	ff 90       	pop	r15
+ 4c6:	ef 90       	pop	r14
+ 4c8:	df 90       	pop	r13
+ 4ca:	cf 90       	pop	r12
+ 4cc:	bf 90       	pop	r11
+ 4ce:	af 90       	pop	r10
+ 4d0:	08 95       	ret
+
+000004d2 <main>:
+void door_lock(void);
+
+
+//--------------------------------
+int main(void)
+{
+ 4d2:	ef 92       	push	r14
+ 4d4:	ff 92       	push	r15
+ 4d6:	0f 93       	push	r16
+ 4d8:	1f 93       	push	r17
+ 4da:	cf 93       	push	r28
+ 4dc:	df 93       	push	r29
+
+// Home Security Initialization function
+// Sets PORT i/o directions and switch OFF Siren and Motor(In free motion)
+void init_homeSecurity(void)
+{
+	Seg7_DDR = 0xFF;		// PORT C connected to 7 Segment display as OUTPUT
+ 4de:	8f ef       	ldi	r24, 0xFF	; 255
+ 4e0:	84 bb       	out	0x14, r24	; 20
+	Seg7_PORT = codeH;		// Initially Display H on 7 seg. display
+ 4e2:	89 e8       	ldi	r24, 0x89	; 137
+ 4e4:	85 bb       	out	0x15, r24	; 21
+	
+	//PA0 (INPUT) from PLL sensor....
+	//PA1&PA2 (OUTPUT) to MOTOR to OPEN DOOR
+	//PA3 (OUTPUT) to Siren	
+	DDRA = 0b00001110;
+ 4e6:	8e e0       	ldi	r24, 0x0E	; 14
+ 4e8:	8a bb       	out	0x1a, r24	; 26
+	Motor_free;
+ 4ea:	d9 98       	cbi	0x1b, 1	; 27
+ 4ec:	da 98       	cbi	0x1b, 2	; 27
+	Siren_off;
+ 4ee:	db 98       	cbi	0x1b, 3	; 27
+	
+	key_flag = false;
+ 4f0:	10 92 66 00 	sts	0x0066, r1
+	int temp = 0;	
+	
+	
+	
+	init_homeSecurity();
+	set_password(1234);				// change the argument to change password...
+ 4f4:	62 ed       	ldi	r22, 0xD2	; 210
+ 4f6:	74 e0       	ldi	r23, 0x04	; 4
+ 4f8:	80 e0       	ldi	r24, 0x00	; 0
+ 4fa:	90 e0       	ldi	r25, 0x00	; 0
+ 4fc:	0e 94 49 00 	call	0x92	; 0x92 <set_password>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 500:	7c e8       	ldi	r23, 0x8C	; 140
+ 502:	f7 2e       	mov	r15, r23
+ 504:	c0 e9       	ldi	r28, 0x90	; 144
+ 506:	d1 e0       	ldi	r29, 0x01	; 1
+ 508:	0f ef       	ldi	r16, 0xFF	; 255
+	init_homeSecurity();
+	set_password(1234);				// change the argument to change password...
+	
+    while(1)
+    {
+        if( (GetKeyPressed() == 9) && (lock_state == false) && (Sensor == 1) )		// Close Door and press Left Soft Key
+ 50a:	18 e8       	ldi	r17, 0x88	; 136
+ 50c:	67 ec       	ldi	r22, 0xC7	; 199
+ 50e:	e6 2e       	mov	r14, r22
+ 510:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 514:	89 30       	cpi	r24, 0x09	; 9
+ 516:	51 f4       	brne	.+20     	; 0x52c <main+0x5a>
+ 518:	80 91 64 00 	lds	r24, 0x0064
+ 51c:	88 23       	and	r24, r24
+ 51e:	31 f4       	brne	.+12     	; 0x52c <main+0x5a>
+ 520:	8b b3       	in	r24, 0x1b	; 27
+ 522:	88 23       	and	r24, r24
+ 524:	19 f0       	breq	.+6      	; 0x52c <main+0x5a>
+		{
+			door_lock();
+ 526:	0e 94 03 01 	call	0x206	; 0x206 <door_lock>
+ 52a:	f2 cf       	rjmp	.-28     	; 0x510 <main+0x3e>
+		}	
+		
+		else if( (lock_state == true) && (Sensor == 0) )			// Door Locked but Sensor stopped => Unauthorized access -> Siren ON
+ 52c:	80 91 64 00 	lds	r24, 0x0064
+ 530:	88 23       	and	r24, r24
+ 532:	09 f4       	brne	.+2      	; 0x536 <main+0x64>
+ 534:	8d c0       	rjmp	.+282    	; 0x650 <main+0x17e>
+ 536:	8b b3       	in	r24, 0x1b	; 27
+ 538:	88 23       	and	r24, r24
+ 53a:	d1 f4       	brne	.+52     	; 0x570 <main+0x9e>
+		{
+			Siren_on;
+ 53c:	db 9a       	sbi	0x1b, 3	; 27
+ 53e:	20 e0       	ldi	r18, 0x00	; 0
+ 540:	30 e0       	ldi	r19, 0x00	; 0
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 542:	15 bb       	out	0x15, r17	; 21
+ 544:	80 e1       	ldi	r24, 0x10	; 16
+ 546:	97 e2       	ldi	r25, 0x27	; 39
+ 548:	fe 01       	movw	r30, r28
+ 54a:	31 97       	sbiw	r30, 0x01	; 1
+ 54c:	f1 f7       	brne	.-4      	; 0x54a <main+0x78>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 54e:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 550:	d9 f7       	brne	.-10     	; 0x548 <main+0x76>
+ 552:	05 bb       	out	0x15, r16	; 21
+ 554:	80 e1       	ldi	r24, 0x10	; 16
+ 556:	97 e2       	ldi	r25, 0x27	; 39
+ 558:	fe 01       	movw	r30, r28
+ 55a:	31 97       	sbiw	r30, 0x01	; 1
+ 55c:	f1 f7       	brne	.-4      	; 0x55a <main+0x88>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 55e:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 560:	d9 f7       	brne	.-10     	; 0x558 <main+0x86>
+}
+
+void Seg_blink(uint8_t data, int time)
+{
+	int temp;
+	for(temp = 0;temp < time; temp ++)
+ 562:	2f 5f       	subi	r18, 0xFF	; 255
+ 564:	3f 4f       	sbci	r19, 0xFF	; 255
+ 566:	23 30       	cpi	r18, 0x03	; 3
+ 568:	31 05       	cpc	r19, r1
+ 56a:	59 f7       	brne	.-42     	; 0x542 <main+0x70>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 56c:	15 bb       	out	0x15, r17	; 21
+ 56e:	d0 cf       	rjmp	.-96     	; 0x510 <main+0x3e>
+		{
+			Siren_on;
+			Seg_blink(codeA,3);		
+		}			
+		
+		else if( (lock_state == true) && (Sensor == 1) )			// Door Locked and Safe
+ 570:	8b b3       	in	r24, 0x1b	; 27
+ 572:	88 23       	and	r24, r24
+ 574:	69 f2       	breq	.-102    	; 0x510 <main+0x3e>
+		{
+			Siren_off;
+ 576:	db 98       	cbi	0x1b, 3	; 27
+			if( GetKeyPressed() == 9)			//Enter Unlocking mode (ASK for PASSWORD)
+ 578:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 57c:	89 30       	cpi	r24, 0x09	; 9
+ 57e:	41 f6       	brne	.-112    	; 0x510 <main+0x3e>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 580:	f5 ba       	out	0x15, r15	; 21
+ 582:	80 e1       	ldi	r24, 0x10	; 16
+ 584:	97 e2       	ldi	r25, 0x27	; 39
+ 586:	fe 01       	movw	r30, r28
+ 588:	31 97       	sbiw	r30, 0x01	; 1
+ 58a:	f1 f7       	brne	.-4      	; 0x588 <main+0xb6>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 58c:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 58e:	d9 f7       	brne	.-10     	; 0x586 <main+0xb4>
+ 590:	05 bb       	out	0x15, r16	; 21
+ 592:	80 e1       	ldi	r24, 0x10	; 16
+ 594:	97 e2       	ldi	r25, 0x27	; 39
+ 596:	fe 01       	movw	r30, r28
+ 598:	31 97       	sbiw	r30, 0x01	; 1
+ 59a:	f1 f7       	brne	.-4      	; 0x598 <main+0xc6>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 59c:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 59e:	d9 f7       	brne	.-10     	; 0x596 <main+0xc4>
+ 5a0:	f5 ba       	out	0x15, r15	; 21
+			if( GetKeyPressed() == 9)			//Enter Unlocking mode (ASK for PASSWORD)
+			{
+				key_flag = true;
+				Seg_blink(codeP,1);			// Display P in 7 Seg display (Enter password Mode)
+											// Wait for 2 secs before entering password
+				key_flag = false;
+ 5a2:	10 92 66 00 	sts	0x0066, r1
+				key = GetKeyPressed();
+				while( key == 0xFF)		// Wait till key is pressed
+				{
+					key = GetKeyPressed();
+ 5a6:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 5aa:	80 93 60 00 	sts	0x0060, r24
+ 5ae:	10 92 61 00 	sts	0x0061, r1
+				key_flag = true;
+				Seg_blink(codeP,1);			// Display P in 7 Seg display (Enter password Mode)
+											// Wait for 2 secs before entering password
+				key_flag = false;
+				key = GetKeyPressed();
+				while( key == 0xFF)		// Wait till key is pressed
+ 5b2:	80 91 60 00 	lds	r24, 0x0060
+ 5b6:	90 91 61 00 	lds	r25, 0x0061
+ 5ba:	8f 3f       	cpi	r24, 0xFF	; 255
+ 5bc:	91 05       	cpc	r25, r1
+ 5be:	99 f3       	breq	.-26     	; 0x5a6 <main+0xd4>
+				{
+					key = GetKeyPressed();
+				}
+				
+				GC_Code();
+ 5c0:	0e 94 6a 01 	call	0x2d4	; 0x2d4 <GC_Code>
+				if(pass_status == true && cancel_state == false) 
+ 5c4:	80 91 65 00 	lds	r24, 0x0065
+ 5c8:	90 91 69 00 	lds	r25, 0x0069
+ 5cc:	88 23       	and	r24, r24
+ 5ce:	21 f0       	breq	.+8      	; 0x5d8 <main+0x106>
+ 5d0:	99 23       	and	r25, r25
+ 5d2:	09 f0       	breq	.+2      	; 0x5d6 <main+0x104>
+ 5d4:	9d cf       	rjmp	.-198    	; 0x510 <main+0x3e>
+ 5d6:	39 c0       	rjmp	.+114    	; 0x64a <main+0x178>
+				{
+					lock_state = false;
+				}
+				else if(pass_status == false && cancel_state == true)
+ 5d8:	99 23       	and	r25, r25
+ 5da:	11 f0       	breq	.+4      	; 0x5e0 <main+0x10e>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 5dc:	e5 ba       	out	0x15, r14	; 21
+ 5de:	98 cf       	rjmp	.-208    	; 0x510 <main+0x3e>
+					cancel_state == false;
+					Seg_display(codeL);
+				}
+				else if(pass_status == false && cancel_state == false)
+				{
+					Siren_on;
+ 5e0:	db 9a       	sbi	0x1b, 3	; 27
+ 5e2:	20 e0       	ldi	r18, 0x00	; 0
+ 5e4:	30 e0       	ldi	r19, 0x00	; 0
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 5e6:	15 bb       	out	0x15, r17	; 21
+ 5e8:	80 e1       	ldi	r24, 0x10	; 16
+ 5ea:	97 e2       	ldi	r25, 0x27	; 39
+ 5ec:	fe 01       	movw	r30, r28
+ 5ee:	31 97       	sbiw	r30, 0x01	; 1
+ 5f0:	f1 f7       	brne	.-4      	; 0x5ee <main+0x11c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 5f2:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 5f4:	d9 f7       	brne	.-10     	; 0x5ec <main+0x11a>
+ 5f6:	05 bb       	out	0x15, r16	; 21
+ 5f8:	80 e1       	ldi	r24, 0x10	; 16
+ 5fa:	97 e2       	ldi	r25, 0x27	; 39
+ 5fc:	fe 01       	movw	r30, r28
+ 5fe:	31 97       	sbiw	r30, 0x01	; 1
+ 600:	f1 f7       	brne	.-4      	; 0x5fe <main+0x12c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 602:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 604:	d9 f7       	brne	.-10     	; 0x5fc <main+0x12a>
+}
+
+void Seg_blink(uint8_t data, int time)
+{
+	int temp;
+	for(temp = 0;temp < time; temp ++)
+ 606:	2f 5f       	subi	r18, 0xFF	; 255
+ 608:	3f 4f       	sbci	r19, 0xFF	; 255
+ 60a:	23 30       	cpi	r18, 0x03	; 3
+ 60c:	31 05       	cpc	r19, r1
+ 60e:	59 f7       	brne	.-42     	; 0x5e6 <main+0x114>
+
+
+//7 Seg display Function
+void Seg_display(uint8_t data)
+{
+	Seg7_PORT = data;
+ 610:	15 bb       	out	0x15, r17	; 21
+					do
+					{
+					key = GetKeyPressed();
+					while( key == 0xFF)		// Wait till key is pressed
+					{
+						key = GetKeyPressed();
+ 612:	0e 94 29 01 	call	0x252	; 0x252 <GetKeyPressed>
+ 616:	80 93 60 00 	sts	0x0060, r24
+ 61a:	10 92 61 00 	sts	0x0061, r1
+					Siren_on;
+					Seg_blink(codeA,3);			// Alert Mode
+					do
+					{
+					key = GetKeyPressed();
+					while( key == 0xFF)		// Wait till key is pressed
+ 61e:	80 91 60 00 	lds	r24, 0x0060
+ 622:	90 91 61 00 	lds	r25, 0x0061
+ 626:	8f 3f       	cpi	r24, 0xFF	; 255
+ 628:	91 05       	cpc	r25, r1
+ 62a:	99 f3       	breq	.-26     	; 0x612 <main+0x140>
+					{
+						key = GetKeyPressed();
+					}
+					
+					GC_Code();
+ 62c:	0e 94 6a 01 	call	0x2d4	; 0x2d4 <GC_Code>
+					}while(pass_status == false && cancel_state == false)	;
+ 630:	80 91 65 00 	lds	r24, 0x0065
+ 634:	90 91 69 00 	lds	r25, 0x0069
+ 638:	88 23       	and	r24, r24
+ 63a:	19 f4       	brne	.+6      	; 0x642 <main+0x170>
+ 63c:	99 23       	and	r25, r25
+ 63e:	49 f3       	breq	.-46     	; 0x612 <main+0x140>
+ 640:	67 cf       	rjmp	.-306    	; 0x510 <main+0x3e>
+					if(pass_status == true && cancel_state == false)
+ 642:	99 23       	and	r25, r25
+ 644:	09 f0       	breq	.+2      	; 0x648 <main+0x176>
+ 646:	64 cf       	rjmp	.-312    	; 0x510 <main+0x3e>
+					{
+						Siren_off;
+ 648:	db 98       	cbi	0x1b, 3	; 27
+						lock_state = false;
+ 64a:	10 92 64 00 	sts	0x0064, r1
+ 64e:	60 cf       	rjmp	.-320    	; 0x510 <main+0x3e>
+				}					
+									
+			}
+		}
+		
+		else if ((lock_state == false) && (pass_status == true))
+ 650:	80 91 65 00 	lds	r24, 0x0065
+ 654:	88 23       	and	r24, r24
+ 656:	09 f4       	brne	.+2      	; 0x65a <main+0x188>
+ 658:	5b cf       	rjmp	.-330    	; 0x510 <main+0x3e>
+		{
+			door_unlock();
+ 65a:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <door_unlock>
+ 65e:	58 cf       	rjmp	.-336    	; 0x510 <main+0x3e>
+
+00000660 <__udivmodsi4>:
+ 660:	a1 e2       	ldi	r26, 0x21	; 33
+ 662:	1a 2e       	mov	r1, r26
+ 664:	aa 1b       	sub	r26, r26
+ 666:	bb 1b       	sub	r27, r27
+ 668:	fd 01       	movw	r30, r26
+ 66a:	0d c0       	rjmp	.+26     	; 0x686 <__udivmodsi4_ep>
+
+0000066c <__udivmodsi4_loop>:
+ 66c:	aa 1f       	adc	r26, r26
+ 66e:	bb 1f       	adc	r27, r27
+ 670:	ee 1f       	adc	r30, r30
+ 672:	ff 1f       	adc	r31, r31
+ 674:	a2 17       	cp	r26, r18
+ 676:	b3 07       	cpc	r27, r19
+ 678:	e4 07       	cpc	r30, r20
+ 67a:	f5 07       	cpc	r31, r21
+ 67c:	20 f0       	brcs	.+8      	; 0x686 <__udivmodsi4_ep>
+ 67e:	a2 1b       	sub	r26, r18
+ 680:	b3 0b       	sbc	r27, r19
+ 682:	e4 0b       	sbc	r30, r20
+ 684:	f5 0b       	sbc	r31, r21
+
+00000686 <__udivmodsi4_ep>:
+ 686:	66 1f       	adc	r22, r22
+ 688:	77 1f       	adc	r23, r23
+ 68a:	88 1f       	adc	r24, r24
+ 68c:	99 1f       	adc	r25, r25
+ 68e:	1a 94       	dec	r1
+ 690:	69 f7       	brne	.-38     	; 0x66c <__udivmodsi4_loop>
+ 692:	60 95       	com	r22
+ 694:	70 95       	com	r23
+ 696:	80 95       	com	r24
+ 698:	90 95       	com	r25
+ 69a:	9b 01       	movw	r18, r22
+ 69c:	ac 01       	movw	r20, r24
+ 69e:	bd 01       	movw	r22, r26
+ 6a0:	cf 01       	movw	r24, r30
+ 6a2:	08 95       	ret
+
+000006a4 <_exit>:
+ 6a4:	f8 94       	cli
+
+000006a6 <__stop_program>:
+ 6a6:	ff cf       	rjmp	.-2      	; 0x6a6 <__stop_program>
